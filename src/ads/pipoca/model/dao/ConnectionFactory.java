@@ -15,7 +15,7 @@ public class ConnectionFactory {
 		}
 	}
 
-	//Conecxao Gil 1
+	//Conexao Gil 1
 	public static Connection getConnection() throws IOException {
 		try {
 			return DriverManager .getConnection("jdbc:mysql://localhost:3306/pipocadb?"
@@ -26,7 +26,7 @@ public class ConnectionFactory {
 		}
 	}
 	
-	//Conecxao Gil 2
+	//Conexao Gil 2
 //		public static Connection getConnection() throws IOException {
 //			try {
 //				return DriverManager .getConnection("jdbc:mysql://localhost:3306/pipocadb?"
