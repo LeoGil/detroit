@@ -88,7 +88,7 @@ CREATE TABLE `detroit`.`contribuintes_tarefas` (
 );
 
 
-CREATE TABLE `colaboradores` (
+CREATE TABLE `detroit`.`colaboradores` (
   `id` int NOT NULL AUTO_INCREMENT,
   `matricula` varchar(45) NOT NULL,
   `nome` varchar(45) NOT NULL,
@@ -97,13 +97,10 @@ CREATE TABLE `colaboradores` (
   `data_cadastro` datetime NOT NULL DEFAULT NOW(),
   `ativo` bit(1) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_UNIQUE` (`id` ASC)
+  UNIQUE KEY `id_UNIQUE` (`id` ASC),
+  UNIQUE KEY `email_UNIQUE` (`email` ASC),
+  UNIQUE KEY `matricula_UNIQUE` (`matricula` ASC)
 );
-
-
-ALTER TABLE `detroit`.`colaboradores` 
-ADD UNIQUE INDEX `email_UNIQUE` (`email` ASC),
-ADD UNIQUE INDEX `matricula_UNIQUE` (`matricula` ASC);
 
 
 CREATE TABLE `detroit`.`situacoes_projetos` (
@@ -148,4 +145,3 @@ INSERT INTO `detroit`.`objetivos` (`descricao`) VALUES ('Social');
 
 INSERT INTO `detroit`.`projetos` (`nome`, `descricao`, `estimativa`, `coordenador_id`, `situacao_id`, `objetivo_id`, `departamento`, `resultado_esperado`) VALUES ('Projeto melhoria de processo', 'Teste de projeto', '2020-06-03', '1', '1', '1', 'Departamento teste', 'Melhorar o processo X');
 INSERT INTO `detroit`.`projetos` (`nome`, `descricao`, `estimativa`, `coordenador_id`, `situacao_id`, `objetivo_id`, `publico_beneficiario`) VALUES ('Projeto Social', 'Teste desse aqui tambem', '2020-06-03', '2', '1', '2', 'O pessoal ali');
-
