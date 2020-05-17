@@ -49,5 +49,11 @@ public class Colaborador {
 		return dataCadastro;
 	}
 	
+	@Override
+	public String toString() {
+		return "Colaborador [id=" + id + ", matriula =" + matricula + ", nome=" + nome + ", email=" + email
+				+ ", senha=" + senha + ", dataCadastro=" + dataCadastro + ", ativo=" + ativo +"]";
+	}
+
 	
 }

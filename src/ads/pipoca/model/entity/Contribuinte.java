@@ -7,6 +7,8 @@ public class Contribuinte {
 	public Papel papel;
 	public Date dataCadastro;
 	public Boolean ativo;
+	public Projeto projeto;
+	
 	public int getId() {
 		return id;
 	}
@@ -34,7 +36,12 @@ public class Contribuinte {
 	public Date getDataCadastro() {
 		return dataCadastro;
 	}
-	
+	public Projeto getProjeto() {
+		return projeto;
+	}
+	public void setProjeto(Projeto projeto) {
+		this.projeto = projeto;
+	}
 	
 
 }

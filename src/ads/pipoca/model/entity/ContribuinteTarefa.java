@@ -6,6 +6,8 @@ public class ContribuinteTarefa {
 	public Contribuinte contribuinte;
 	public Date dataCadastro;
 	public Boolean ativo;
+	public Tarefa tarefa;
+	
 	public int getId() {
 		return id;
 	}
@@ -26,6 +28,12 @@ public class ContribuinteTarefa {
 	}
 	public Date getDataCadastro() {
 		return dataCadastro;
+	}
+	public Tarefa getTarefa() {
+		return tarefa;
+	}
+	public void setTarefa(Tarefa tarefa) {
+		this.tarefa = tarefa;
 	}
 	
 	
