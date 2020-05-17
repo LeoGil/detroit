@@ -18,7 +18,7 @@ public class ConnectionFactory {
 	//Conexao Gil 1
 	public static Connection getConnection() throws IOException {
 		try {
-			return DriverManager .getConnection("jdbc:mysql://localhost:3306/pipocadb?"
+			return DriverManager .getConnection("jdbc:mysql://localhost:3306/detroit?"
 					+ "useTimezone=true&serverTimezone=UTC&user=root&password=rootp@ssw0rd");
 		} catch (SQLException e) {
 			e.printStackTrace();
