@@ -6,47 +6,46 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-	static {
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+    static {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-	}
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 
-	// Conexao Gil 1
-//	public static Connection getConnection() throws IOException {
-//		try {
-//			return DriverManager .getConnection("jdbc:mysql://localhost:3306/detroit?"
-//					+ "useTimezone=true&serverTimezone=UTC&user=root&password=rootp@ssw0rd");
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//			throw new IOException(e);
-//		}
-//	}
-//	
-	// Conexao Gil 2
-	// public static Connection getConnection() throws IOException {
-	// 	try {
-	// 		return DriverManager.getConnection("jdbc:mysql://localhost:3306/detroit?"
-	// 				+ "useTimezone=true&serverTimezone=UTC&user=leonardo&password=root");
-	// 	} catch (SQLException e) {
-	// 		e.printStackTrace();
-	// 		throw new IOException(e);
-	// 	}
-	// }
+    // Conexao Gil 1
+//    public static Connection getConnection() throws IOException {
+//        try {
+//            return DriverManager .getConnection("jdbc:mysql://localhost:3306/detroit?"
+//                    + "useTimezone=true&serverTimezone=UTC&user=root&password=rootp@ssw0rd");
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//            throw new IOException(e);
+//        }
+//    }
+//
+    // Conexao Gil 2
+    // public static Connection getConnection() throws IOException {
+    //     try {
+    //         return DriverManager.getConnection("jdbc:mysql://localhost:3306/detroit?"
+    //                 + "useTimezone=true&serverTimezone=UTC&user=leonardo&password=root");
+    //     } catch (SQLException e) {
+    //         e.printStackTrace();
+    //         throw new IOException(e);
+    //     }
+    // }
 
-	//Conexao WILLIAM
-	public static Connection getConnection() throws IOException {
+    //Conexao WILLIAM
+    public static Connection getConnection() throws IOException {
         try {
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/detroit?"
-                    + "useTimezone=true&serverTimezone=UTC&user=alunos&password=alunos");
+                    + "useTimezone=true&serverTimezone=UTC&user=Alunos&password=alunos");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new IOException(e);
         }
-	}
-
+    }
 }
