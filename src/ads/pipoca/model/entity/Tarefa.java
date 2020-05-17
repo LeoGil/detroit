@@ -6,7 +6,7 @@ public class Tarefa {
 	private int id;
 	private String descricao;
 	private Projeto projeto;
-//	private SituacaoTarefa situacaoTarefa;
+	private SituacaoTarefa situacaoTarefa;
 	private Date dataCadastro;
 	private Boolean ativo;
 	
@@ -27,6 +27,12 @@ public class Tarefa {
 	}
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
+	}
+	public SituacaoTarefa getSituacaoTarefa() {
+		return situacaoTarefa;
+	}
+	public void setSituacaoTarefa(SituacaoTarefa situacaoTarefa) {
+		this.situacaoTarefa = situacaoTarefa;
 	}
 	public Date getDataCadastro() {
 		return dataCadastro;
