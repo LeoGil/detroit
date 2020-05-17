@@ -145,3 +145,7 @@ INSERT INTO `detroit`.`objetivos` (`descricao`) VALUES ('Social');
 
 INSERT INTO `detroit`.`projetos` (`nome`, `descricao`, `estimativa`, `coordenador_id`, `situacao_id`, `objetivo_id`, `departamento`, `resultado_esperado`) VALUES ('Projeto melhoria de processo', 'Teste de projeto', '2020-06-03', '1', '1', '1', 'Departamento teste', 'Melhorar o processo X');
 INSERT INTO `detroit`.`projetos` (`nome`, `descricao`, `estimativa`, `coordenador_id`, `situacao_id`, `objetivo_id`, `publico_beneficiario`) VALUES ('Projeto Social', 'Teste desse aqui tambem', '2020-06-03', '2', '1', '2', 'O pessoal ali');
+
+ALTER TABLE `detroit`.`projetos` 
+CHANGE COLUMN `coordenador_id` `colaborador_id` INT(11) NOT NULL ;
+
