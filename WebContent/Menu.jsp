@@ -11,6 +11,7 @@
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="index.jsp">Hora da Pipoca</a>
+				<a class="dropdown-item" href="projetos.do?acao=listar">Tts</a>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
 				<ul class="nav navbar-nav">

@@ -1,2 +1,8 @@
-/build/
-ConnectionFactory.java
+# Pasta Build do Eclipse
+/build/ 
+# Caches das SO 
+.DS_Store
+thumbs.db
+desktop.ini
+src/ads/pipoca/model/dao/ConnectionFactory.java
+build

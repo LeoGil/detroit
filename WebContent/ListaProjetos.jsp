@@ -61,13 +61,14 @@
     </script>
 </head>
 <body>
+<p>${projetos }</p>
 	<!-- importa o menu do sistema -->
 	<c:import url="Menu.jsp"/>
 	<!-- conteiner principal -->
 	<div class="container">
 	<fmt:setLocale value="pt_BR"/>
 	<div class="row">
-		<h1>Lista de Filmes</h1>
+		<h1>Lista de Projetos</h1>
 		<hr>
 	</div>
 	<form action="manter_filmes.do" method="POST">
@@ -93,22 +94,15 @@
 			<div class="col-md-12">
 				<table class="table table-striped">
 				<tr>
-				<th>&nbsp;</th><th>Pôster</th><th>Id</th><th>Título</th><th>Gênero</th><th>Diretor</th><th>Lançamento</th>
+				<th>Nome</th><th>Colaborador</th><th>Objetivo</th><th>Situação</th>
 				</tr>
-				<c:forEach var="filme" items="${filmes}" >
+				<c:forEach var="projeto" items="${projetos}" >
 					<tr>
-					<td><div class="checkbox">
-						<label>
-							<input type="checkbox" name="box${filme.id}" onClick="tratarBotoes(this)">
-						</label>
-						</div>
-					</td>
-					<td><img src="${filme.posterPath}" class="img-thumbnail" width="70"/></td>
-					<td>${filme.id}</td> 
-					<td>${filme.titulo}</td>
-					<td>${filme.genero.nome}</td>
-					<td>${filme.diretor}</td>
-					<td><fmt:formatDate value="${filme.dataLancamento}" dateStyle="SHORT"/></td>
+					<td>${projeto.nome}</td> 
+					<td>${projeto.colaborador.nome}</td>
+					<td>${projeto.objetivo.descricao}</td>
+					<td>${projeto.situacaoProjeto.situacao}</td>
+					<!-- <td><fmt:formatDate value="${filme.dataLancamento}" dateStyle="SHORT"/></td> -->
 					</tr>
 				</c:forEach>
 				</table>

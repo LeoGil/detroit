@@ -8,8 +8,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import ads.pipoca.model.entity.Colaborador;
-import ads.pipoca.model.entity.Filme;
-import ads.pipoca.model.entity.Genero;
 import ads.pipoca.model.entity.Objetivo;
 import ads.pipoca.model.entity.Projeto;
 import ads.pipoca.model.entity.SituacaoProjeto;
@@ -51,11 +49,11 @@ public class ProjetoDAO {
 
 	public Projeto buscarProjeto(int id) throws IOException {
 		Projeto projeto = null;
-		String sql = "SELECT projetos.nome, projetos.descricao, estimativa, colaborador_id, colaboradores.nome, situacao_id, situacoes_projetos.situacao, objetivo_id, objetivos.descricao, departamento, resultado_esperado, publico_beneficiario" + 
-				"FROM projetos" + 
-				"INNER JOIN colaboradores ON colaboradores.id = projetos.colaborador_id" + 
-				"INNER JOIN situacoes_projetos ON situacoes_projetos.id = projetos.situacao_id" + 
-				"INNER JOIN objetivos ON objetivos.id = projetos.objetivo_id" + 
+		String sql = "SELECT projetos.nome, projetos.descricao, estimativa, colaborador_id, colaboradores.nome, situacao_id, situacoes_projetos.situacao, objetivo_id, objetivos.descricao, departamento, resultado_esperado, publico_beneficiario, projetos.data_cadastro, projetos.ativo " + 
+				"FROM projetos " + 
+				"INNER JOIN colaboradores ON colaboradores.id = projetos.colaborador_id " + 
+				"INNER JOIN situacoes_projetos ON situacoes_projetos.id = projetos.situacao_id " + 
+				"INNER JOIN objetivos ON objetivos.id = projetos.objetivo_id " + 
 				"WHERE projetos.id = ?";
 
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -84,6 +82,8 @@ public class ProjetoDAO {
 					projeto.setDepartamento(rs.getString("departamento"));
 					projeto.setResultadoEsperado(rs.getString("resultado_esperado"));
 					projeto.setPublicoBeneficiario(rs.getString("publico_beneficiario"));
+					projeto.setDataCadastro(rs.getDate("data_cadastro"));
+					projeto.setAtivo(rs.getBoolean("ativo"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -99,10 +99,10 @@ public class ProjetoDAO {
 	public ArrayList<Projeto> listarProjetos() throws IOException {
 		Projeto projeto = null;
 		ArrayList<Projeto> lista = new ArrayList<>();
-		String sql = "SELECT projetos.id, projetos.nome, projetos.descricao, estimativa, colaborador_id, colaboradores.nome, situacao_id, situacoes_projetos.situacao, objetivo_id, objetivos.descricao, departamento, resultado_esperado, publico_beneficiario" + 
-				"FROM projetos" + 
-				"INNER JOIN colaboradores ON colaboradores.id = projetos.colaborador_id" + 
-				"INNER JOIN situacoes_projetos ON situacoes_projetos.id = projetos.situacao_id" + 
+		String sql = "SELECT projetos.id, projetos.nome, projetos.descricao, estimativa, colaborador_id, colaboradores.nome, situacao_id, situacoes_projetos.situacao, objetivo_id, objetivos.descricao, departamento, resultado_esperado, publico_beneficiario, projetos.data_cadastro, projetos.ativo " + 
+				"FROM projetos " + 
+				"INNER JOIN colaboradores ON colaboradores.id = projetos.colaborador_id " + 
+				"INNER JOIN situacoes_projetos ON situacoes_projetos.id = projetos.situacao_id " + 
 				"INNER JOIN objetivos ON objetivos.id = projetos.objetivo_id";
 
 		try (Connection conn = ConnectionFactory.getConnection();
@@ -130,6 +130,8 @@ public class ProjetoDAO {
 				projeto.setDepartamento(rs.getString("departamento"));
 				projeto.setResultadoEsperado(rs.getString("resultado_esperado"));
 				projeto.setPublicoBeneficiario(rs.getString("publico_beneficiario"));
+				projeto.setDataCadastro(rs.getDate("data_cadastro"));
+				projeto.setAtivo(rs.getBoolean("ativo"));
 				lista.add(projeto);
 			}
 		} catch (SQLException e) {
