@@ -1,2 +1,2 @@
-src/ads/pipoca/model/dao/ConnectionFactory.java
-*.class
+/build/
+ConnectionFactory.java
