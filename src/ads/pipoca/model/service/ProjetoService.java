@@ -2,13 +2,14 @@ package ads.pipoca.model.service;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import ads.pipoca.model.entity.Filme;
+import ads.pipoca.model.dao.ProjetoDAO;
+import ads.pipoca.model.entity.Projeto;
 
 public class ProjetoService {
-	ProjetoDAO;
+	ProjetoDAO dao;
 	
 	public ProjetoService() {
-		this.dao = new ProjetoDAO;
+		this.dao = new ProjetoDAO();
 	}
 	
 	public ArrayList<Projeto> listarProjetos() throws IOException {
@@ -35,7 +36,7 @@ public class ProjetoService {
 		dao.atualizarProjeto(projeto);
 	}
 	
-	public Filme inativarProjeto(int id) throws IOException {
+	public Projeto inativarProjeto(int id) throws IOException {
 		Projeto projeto = dao.buscarProjeto(id);
 		if (projeto != null) {
 			dao.inativarProjeto(projeto.getId());
@@ -45,7 +46,7 @@ public class ProjetoService {
 		}
 	}
 	
-	public Filme reativarProjeto(int id) throws IOException {
+	public Projeto reativarProjeto(int id) throws IOException {
 		Projeto projeto = dao.buscarProjeto(id);
 		if (projeto != null) {
 			dao.reativarProjeto(projeto.getId());
@@ -55,7 +56,7 @@ public class ProjetoService {
 		}
 	}
 	
-	public Filme concluirProjeto(int id) throws IOException {
+	public Projeto concluirProjeto(int id) throws IOException {
 		Projeto projeto = dao.buscarProjeto(id);
 		if (projeto != null) {
 			dao.concluirProjeto(projeto.getId());
