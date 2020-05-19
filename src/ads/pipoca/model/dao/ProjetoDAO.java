@@ -99,7 +99,7 @@ public class ProjetoDAO {
 	public ArrayList<Projeto> listarProjetos() throws IOException {
 		Projeto projeto = null;
 		ArrayList<Projeto> lista = new ArrayList<>();
-		String sql = "SELECT projetos.id, projetos.nome, projetos.descricao, estimativa, colaborador_id, colaboradores.nome, situacao_id, situacoes_projetos.situacao, objetivo_id, objetivos.descricao, departamento, resultado_esperado, publico_beneficiario, projetos.data_cadastro, projetos.ativo " + 
+		String sql = "SELECT projetos.id, projetos.nome, projetos.descricao, estimativa, colaborador_id, colaboradores.nome, situacao_id, situacoes_projetos.situacao, situacoes_projetos.classe, objetivo_id, objetivos.descricao, departamento, resultado_esperado, publico_beneficiario, projetos.data_cadastro, projetos.ativo " + 
 				"FROM projetos " + 
 				"INNER JOIN colaboradores ON colaboradores.id = projetos.colaborador_id " + 
 				"INNER JOIN situacoes_projetos ON situacoes_projetos.id = projetos.situacao_id " + 
@@ -122,6 +122,7 @@ public class ProjetoDAO {
 				SituacaoProjeto situacaoProjeto = new SituacaoProjeto();
 				situacaoProjeto.setId(rs.getInt("situacao_id"));
 				situacaoProjeto.setSituacao(rs.getString("situacoes_projetos.situacao"));
+				situacaoProjeto.setClasse(rs.getString("situacoes_projetos.classe"));
 				projeto.setSituacaoProjeto(situacaoProjeto);
 				Objetivo objetivo = new Objetivo();
 				objetivo.setId(rs.getInt("objetivo_id"));

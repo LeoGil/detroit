@@ -149,3 +149,12 @@ INSERT INTO `detroit`.`projetos` (`nome`, `descricao`, `estimativa`, `coordenado
 ALTER TABLE `detroit`.`projetos` 
 CHANGE COLUMN `coordenador_id` `colaborador_id` INT(11) NOT NULL ;
 
+ALTER TABLE `detroit`.`situacoes_projetos` 
+ADD COLUMN `b_class` VARCHAR(45) NULL AFTER `ativo`;
+
+
+UPDATE `detroit`.`situacoes_projetos` SET `classe`='warning' WHERE `id`='1';
+UPDATE `detroit`.`situacoes_projetos` SET `classe`='danger' WHERE `id`='2';
+UPDATE `detroit`.`situacoes_projetos` SET `classe`='success' WHERE `id`='3';
+
+

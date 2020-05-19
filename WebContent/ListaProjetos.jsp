@@ -1,139 +1,109 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
-<link rel="canonical"
-	href="https://getbootstrap.com/docs/3.3/examples/starter-template/">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <title>Lista de Filmes</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
-
-<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="starter-template.css" rel="stylesheet">
-
-<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-<script src="js/ie-emulation-modes-warning.js"></script>
-
-<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script>
-    	var caixas = [];
-    	function tratarBotoes(element){
-    		if (element.checked){
-    			caixas.push(element);
-    		} else {
-    			caixas.pop();
-    		}
-    		if (caixas.length == 0){
-    			document.getElementById("btnEditar").disabled = true;
-    			document.getElementById("btnVisualizar").disabled = true;
-    			document.getElementById("btnExcluir").disabled = true;
-    		} else if (caixas.length == 1){
-        		document.getElementById("btnEditar").disabled = false;
-    			document.getElementById("btnVisualizar").disabled = false;
-        		document.getElementById("btnExcluir").disabled = false;
-    		} else {
-       			document.getElementById("btnEditar").disabled = true;
-    			document.getElementById("btnVisualizar").disabled = true;
-      			document.getElementById("btnExcluir").disabled = false;
-   			}
-    	}
-    </script>
 </head>
 <body>
-<p>${projetos }</p>
-	<!-- importa o menu do sistema -->
-	<c:import url="Menu.jsp"/>
-	<!-- conteiner principal -->
-	<div class="container">
-	<fmt:setLocale value="pt_BR"/>
-	<div class="row">
-		<h1>Lista de Projetos</h1>
-		<hr>
-	</div>
-	<form action="manter_filmes.do" method="POST">
-	<!-- modal -->
-	<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog">
-		  <div class="modal-dialog" role="document">
-		    <div class="modal-content">
-		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title">Excluir filme</h4>
-		      </div>
-		      <div class="modal-body">
-		        <p>Confirma a exclusão do(s) filme(s)?</p>
-		      </div>
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-		        <button type="submit" name="acao" value="btn-excluir-de-modal-listar-filmes-jsp" class="btn btn-danger">Excluir</button>
-		      </div>
-		    </div><!-- /.modal-content -->
-		  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table table-striped">
-				<tr>
-				<th>Nome</th><th>Colaborador</th><th>Objetivo</th><th>Situação</th>
-				</tr>
-				<c:forEach var="projeto" items="${projetos}" >
-					<tr>
-					<td>${projeto.nome}</td> 
-					<td>${projeto.colaborador.nome}</td>
-					<td>${projeto.objetivo.descricao}</td>
-					<td>${projeto.situacaoProjeto.situacao}</td>
-					<!-- <td><fmt:formatDate value="${filme.dataLancamento}" dateStyle="SHORT"/></td> -->
-					</tr>
-				</c:forEach>
-				</table>
-			</div>
-		</div>
-		<hr>
-			<div id="actions" class="row">
-				<div class="col-md-12">
-					<button type="submit" id="btnEditar" name="acao" value="btn-editar-de-listar-filmes-jsp" class="btn btn-primary" disabled>Editar</button>
-					<button type="submit" id="btnVisualizar" name="acao" value="btn-visualizar-de-listar-filmes-jsp" class="btn btn-info" disabled>Visualizar</button>
-					<input type="button" class="btn btn-danger" id="btnExcluir" data-toggle="modal" data-target="#delete-modal" value="Excluir" disabled>
-					<a href="index.jsp" class="btn btn-default">Voltar</a>
+	<div class="modal fade" id="cadastrarProjetoModal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Novo Projeto</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-success">Cadastrar</button>
 				</div>
 			</div>
-		</form>
-		<br><br><br>
-	</div><!-- /.container -->
+		</div>
+	</div>
+	<!-- importa o menu do sistema -->
+	<c:import url="Menu.jsp" />
+	<!-- conteiner principal -->
+	<div class="container">
+
+
+		<fmt:setLocale value="pt_BR" />
+		<div class="row">
+			<div class="col-12 mb-5">
+				<h1 class="float-left">Lista de Projetos</h1>
+				<button type="button" class="btn btn-success float-right"
+					data-toggle="modal" data-target="#cadastrarProjetoModal">
+					Cadastrar projeto</button>
+			</div>
+		</div>
+		<div class="row">
+			<form action="projetos.do" method="GET">
+				<c:forEach var="projeto" items="${projetos}">
+					<div class="col-4 mb-5">
+						<div
+							class="card shadow-sm border-${projeto.situacaoProjeto.classe}">
+							<div class="card-body">
+								<h5 class="card-title">
+									<b>${projeto.nome }</b>
+								</h5>
+								<hr>
+								<ul class="list-unstyled">
+									<li><b>Responsável: </b>${projeto.colaborador.nome }</li>
+									<li><b>Objetivo: </b>${projeto.objetivo.descricao }</li>
+									<li><b>Situação do projeto: </b>${projeto.situacaoProjeto.situacao }</li>
+								</ul>
+								<button type="submit" id="btnVisualizar" name="acao"
+									value="visualizar_projeto" class="btn btn-primary">Visualizar</button>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</form>
+		</div>
+	</div>
+	<!-- /.container -->
 
 
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script>
-		window.jQuery
-				|| document
-						.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
-	</script>
+	<!-- <script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+	<!-- <script> 
+		window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+	</script> -->
+	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script>
+		/* var employees = {
+			<c:forEach items="${projetos}" var="projeto">
+			"${projeto.id}": {
+				situacao:"${projeto.situacaoProjeto.situacao}"
+			},
+			</c:forEach>
+		}
+
+		// let projetos = []
+		// projetos = "${projetos}"
+		
+		console.log(employees) */
+	</script>
 	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-	<script src="js/ie10-viewport-bug-workaround.js"></script>
+	<!-- <script src="js/ie10-viewport-bug-workaround.js"></script> -->
 </body>
 </html>
