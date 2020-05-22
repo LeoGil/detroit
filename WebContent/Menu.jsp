@@ -1,33 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<nav class="navbar navbar-inverse navbar-fixed-top">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed"
-					data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-					aria-controls="navbar">
-					<span class="sr-only">Toggle navigation</span> <span
-						class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="index.jsp">Hora da Pipoca</a>
-				<a class="dropdown-item" href="projetos.do?acao=listar">Tts</a>
-			</div>
-			<div id="navbar" class="collapse navbar-collapse">
-				<ul class="nav navbar-nav">
-					<li class="nav-item dropdown">
-                    	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filme</a>
-                    		<ul class="dropdown-menu">
-  						  	<li><a class="dropdown-item" href="manter_filmes.do?acao=menu-novo-menu-jsp">Novo</a></li>
-  						   	<li><a class="dropdown-item" href="MostrarFilme.jsp">Procurar</a></li>
-  						   	<li><a class="dropdown-item" href="manter_filmes.do?acao=menu-listar-menu-jsp">Listar</a></li>
-						</ul>
-                    </li>
-					<li><a href="comprar_filmes.do?acao=menu-comprar-filmes-de-menu-jsp">Comprar Filmes</a></li>
-					<li><a href="#">Carrinho de Compras</a></li>
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
-	</nav>
-	<br><br><br><br>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm mb-5">
+    	<a class="my-0 mr-md-auto navbar-brand" href="#">
+		    <img src="https://getbootstrap.com/docs/4.5/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" loading="lazy">
+		    Detroit
+  		</a>
+		<nav class="my-2 my-md-0 mr-md-3">
+		  <a class="p-2 text-dark" href="projetos.do?acao=listar">Projetos</a>
+		  <a class="p-2 text-dark" href="colaboradores.do?acao=listar">Colaboradores</a>
+		</nav>
+		<a class="btn btn-outline-danger" href="#">Deslogar</a>
+	</div>
