@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import ads.pipoca.model.entity.*;
 
@@ -84,6 +85,43 @@ public class ComentarioDAO {
 			throw new IOException(e);
 		}
 		return comentario;
+	}
+	
+	public ArrayList<Comentario> listarComentarios() throws IOException {
+		Comentario comentario = null;
+		ArrayList<Comentario> lista = new ArrayList<>();
+		String sql = "SELECT comentarios.id, comentario, comentarios.projeto_id, projetos.nome, comentarios.colaborador_id, colaboradores.nome, tarefa_id, tarefas.descricao, comentarios.data_cadastro" 
+				+ "FROM comentarios" 
+				+ "INNER JOIN colaboradores ON colaboradores.id = comentarios.colaborador_id"
+				+ "INNER JOIN projetos ON projetos.id = comentarios.projeto_id"
+				+ "INNER JOIN tarefas ON tarefas.id = comentarios.tarefa_id;";
+
+		try (Connection conn = ConnectionFactory.getConnection();
+				PreparedStatement pst = conn.prepareStatement(sql);
+				ResultSet rs = pst.executeQuery();) {
+
+			while (rs.next()) {
+				comentario = new Comentario();
+				comentario.setId(rs.getInt("comentarios.id"));
+				comentario.setComentario(rs.getString("comentario"));
+				Projeto projeto = new Projeto();
+				projeto.setId(rs.getInt("comentarios.projeto_id"));
+				projeto.setNome(rs.getString("projetos.nome"));
+				Colaborador colaborador = new Colaborador();
+				colaborador.setId(rs.getInt("comentarios.colaborador_id"));
+				colaborador.setNome(rs.getString("colaboradores.nome"));
+				projeto.setColaborador(colaborador);
+				Tarefa tarefa = new Tarefa();
+				tarefa.setId(rs.getInt("tarefa_id"));
+				tarefa.setDescricao(rs.getString("tarefas.descricao"));
+				comentario.setDataCadastro(rs.getDate("comentarios.data_cadastro"));
+				lista.add(comentario);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new IOException(e);
+		}
+		return lista;
 	}
 	
 }
