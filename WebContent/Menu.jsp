@@ -7,7 +7,7 @@
   		</a>
 		<nav class="my-2 my-md-0 mr-md-3">
 		  <a class="p-2 text-dark font-weight-bolder" href="projetos.do?acao=listar">Projetos</a>
-		  <a class="p-2 text-dark font-weight-bolder" href="colaboradores.do?acao=listar">Colaboradores</a>
+		  <a class="p-2 text-dark font-weight-bolder" href="colaboradores.do?acao=listar">Usuários</a>
 		</nav>
 		<a class="btn btn-outline-danger font-weight-bolder" href="#">Deslogar</a>
 	</div>

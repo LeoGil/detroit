@@ -10,7 +10,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<title>Lista de Colaboradores</title>
+<title>Lista de Usuários</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Novo Colaborador</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Novo Usuário</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -45,10 +45,10 @@
 		<fmt:setLocale value="pt_BR" />
 		<div class="row">
 			<div class="col-12 mb-5">
-				<h1 class="float-left">Lista de Colaboradores</h1>
+				<h1 class="float-left">Lista de Usuários</h1>
 				<button type="button" class="btn btn-success float-right"
 					data-toggle="modal" data-target="#cadastrarProjetoModal">
-					Cadastrar colaborador</button>
+					Cadastrar usuário</button>
 			</div>
 		</div>
 		<form action="colaboradores.do" method="GET">
