@@ -51,8 +51,8 @@
 					Cadastrar projeto</button>
 			</div>
 		</div>
-		<div class="row">
-			<form action="projetos.do" method="GET">
+		<form action="projetos.do" method="GET">
+			<div class="row">
 				<c:forEach var="projeto" items="${projetos}">
 					<div class="col-4 mb-5">
 						<div
@@ -73,8 +73,8 @@
 						</div>
 					</div>
 				</c:forEach>
-			</form>
-		</div>
+			</div>
+		</form>
 	</div>
 	<!-- /.container -->
 
