@@ -42,6 +42,11 @@ public class Contribuinte {
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
+	public void setDataCadastro(Date dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+	
+	
 	
 
 }
