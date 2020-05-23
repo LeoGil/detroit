@@ -7,6 +7,13 @@ import ads.pipoca.model.dao.GeneroDAO;
 import ads.pipoca.model.entity.Genero;
 
 public class GeneroService {
+	
+	GeneroDAO dao;
+	
+	public GeneroService(){
+		this.dao = new GeneroDAO();
+	}
+	
 	public ArrayList<Genero> listarGeneros() throws IOException {
 		GeneroDAO dao = new GeneroDAO();
 		return dao.listarGeneros();

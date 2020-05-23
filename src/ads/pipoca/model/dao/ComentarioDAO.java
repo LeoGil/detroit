@@ -69,12 +69,15 @@ public class ComentarioDAO {
 					comentario.setComentario(rs.getString("comentario"));
 					Projeto projeto = new Projeto ();
 					projeto.setId(rs.getInt("projeto_id"));
+					comentario.setProjeto(projeto);
 					Colaborador colaborador = new Colaborador();
 					colaborador.setId(rs.getInt("colaborador_id"));
+					comentario.setColaborador(colaborador);
 					comentario.setDataCadastro(rs.getDate("data_lancamento"));
 					comentario.setAtivo(rs.getBoolean("ativo"));
 					Tarefa tarefa = new Tarefa();
 					tarefa.setId(rs.getInt("tarefa_id"));
+					comentario.setTarefa(tarefa);
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -107,13 +110,15 @@ public class ComentarioDAO {
 				Projeto projeto = new Projeto();
 				projeto.setId(rs.getInt("comentarios.projeto_id"));
 				projeto.setNome(rs.getString("projetos.nome"));
+				comentario.setProjeto(projeto);
 				Colaborador colaborador = new Colaborador();
 				colaborador.setId(rs.getInt("comentarios.colaborador_id"));
 				colaborador.setNome(rs.getString("colaboradores.nome"));
-				projeto.setColaborador(colaborador);
+				comentario.setColaborador(colaborador);
 				Tarefa tarefa = new Tarefa();
 				tarefa.setId(rs.getInt("tarefa_id"));
 				tarefa.setDescricao(rs.getString("tarefas.descricao"));
+				comentario.setTarefa(tarefa);
 				comentario.setDataCadastro(rs.getDate("comentarios.data_cadastro"));
 				lista.add(comentario);
 			}
