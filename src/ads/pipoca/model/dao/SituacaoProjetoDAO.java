@@ -7,33 +7,33 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import ads.pipoca.model.entity.Objetivo;
+import ads.pipoca.model.entity.SituacaoProjeto;
 
-public class ObjetivoDAO {
-	public ArrayList<Objetivo> listarObjetivos() throws IOException {
-		ArrayList<Objetivo> objetivos = new ArrayList<>();
-		String sql = "select id, descricao from objetivos order by descricao";
+public class SituacaoProjetoDAO {
+	public ArrayList<SituacaoProjeto> listarSituacoes() throws IOException {
+		ArrayList<SituacaoProjeto> situacoes = new ArrayList<>();
+		String sql = "select id, situacao from situacoes_projetos order by situacao";
 
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
 				ResultSet rs = pst.executeQuery();) {
 
 			while (rs.next()) {
-				Objetivo objetivo = new Objetivo();
-				objetivo.setId(rs.getInt("id"));
-				objetivo.setDescricao(rs.getString("descricao"));
-				objetivos.add(objetivo);
+				SituacaoProjeto situacao = new SituacaoProjeto();
+				situacao.setId(rs.getInt("id"));
+				situacao.setSituacao(rs.getString("situacao"));
+				situacoes.add(situacao);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);
 		}
-		return objetivos;
+		return situacoes;
 	}
 	
-	public Objetivo buscarObjetivos(int id) throws IOException {
-		Objetivo objetivo = null;
-		String sql = "select id, descricao from objetivos where id=?";
+	public SituacaoProjeto buscarSituacao(int id) throws IOException {
+		SituacaoProjeto situacao = null;
+		String sql = "select id, situacao from situacoes_projetos where id=?";
 
 		try (Connection conn = ConnectionFactory.getConnection(); 
 				PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -42,15 +42,15 @@ public class ObjetivoDAO {
 			try (ResultSet rs = pst.executeQuery();) {
 
 				if (rs.next()) {
-					objetivo = new Objetivo();
-					objetivo.setId(id);
-					objetivo.setDescricao(rs.getString("descricao"));
+					situacao = new SituacaoProjeto();
+					situacao.setId(id);
+					situacao.setSituacao(rs.getString("situacao"));
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);
 		}
-		return objetivo;
+		return situacao;
 	}
 }
