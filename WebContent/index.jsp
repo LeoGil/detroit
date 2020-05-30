@@ -43,30 +43,7 @@
 	<!-- conteiner principal -->
 	<div class="container">
 
-		<div class="starter-template">
-			<div class="row">
-			</div>
-			<div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<h1><p class="text-center">A Hora da Pipoca</p></h1>
-					<div class="lead">
-						<p class="text-center">O cadastro de filmes da disciplina de ArqDes.</p>
-						<p class="text-center">ADS - USJT - 2020</p>
-					</div>
-				</div>
-				<div class="col-md-4"></div>
-			</div>
-			<div class="row">
-				<div class="col-md-4"></div>
-				<div class="col-md-4">
-					<div class="center-block">
-					<img src="img/hora_pipoca.jpg" class="img-responsive"/>
-					</div>
-				</div>
-				<div class="col-md-4"></div>
-			</div>
-		</div>
+		
 	</div><!-- /.container -->
 
 
