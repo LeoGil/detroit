@@ -20,7 +20,12 @@ public class ColaboradoresController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
+		Colaborador colaborador = null;
 		ColaboradorService cService = new ColaboradorService();
+		String nome = null;
+		String email = null;
+		String matricula = null;
+		String senha = null;
 		String saida = "index.jsp";
 		ArrayList<Colaborador> colaboradores = null;
 		
@@ -30,7 +35,23 @@ public class ColaboradoresController extends HttpServlet {
 			request.setAttribute("colaboradores", colaboradores);
 			saida = "ListaColaboradores.jsp";
 			break;
-
+			
+		case "inserir_colaborador":
+			nome = request.getParameter("nome");
+			email = request.getParameter("email");
+			matricula = request.getParameter("matricula");
+			senha = request.getParameter("senha");
+			colaborador = new Colaborador();
+			colaborador.setNome(nome);
+			colaborador.setEmail(email);
+			colaborador.setMatricula(matricula);
+			colaborador.setSenha(senha);
+			int id = cService.inserirColaborador(colaborador);
+			colaborador.setId(id);
+			
+			saida = "index.jsp";
+			break;
+			
 		default:
 			break;
 		}

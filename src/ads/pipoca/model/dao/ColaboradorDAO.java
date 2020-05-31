@@ -13,7 +13,7 @@ public class ColaboradorDAO {
 	public int inserirColaborador(Colaborador colaborador) throws IOException {
 		int id = -1;
 		String sql = "INSERT INTO colaboradores (matricula, nome, email, senha) VALUES (?, ?, ?, ?);";
-
+		
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setString(1, colaborador.getMatricula());
