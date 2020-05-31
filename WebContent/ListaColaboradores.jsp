@@ -21,7 +21,8 @@
 		<div class="modal-dialog modal-xl" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Cadastro Usuário</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Cadastro
+						Usuário</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -38,12 +39,13 @@
 								<label for="input_email">E-mail</label> <input type="email"
 									class="form-control" name="email" id="input_email" required>
 							</div>
-							
+
 						</div>
 						<div class="form-row">
 							<div class="form-group col-md-6">
-								<label for="input_matricula">Matrícula</label> <input type="text"
-									class="form-control" name="matricula" id="input_matricula" required>
+								<label for="input_matricula">Matrícula</label> <input
+									type="text" class="form-control" name="matricula"
+									id="input_matricula" required>
 							</div>
 							<div class="form-group col-md-6">
 								<label for="input_senha">Senha</label> <input type="password"
@@ -54,7 +56,8 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-success" name="acao" value="inserir_colaborador">Cadastrar</button>
+						<button type="submit" class="btn btn-success" name="acao"
+							value="inserir_colaborador">Cadastrar</button>
 					</div>
 				</form>
 			</div>
@@ -75,29 +78,45 @@
 					Cadastrar usuário</button>
 			</div>
 		</div>
-		<form action="colaboradores.do" method="GET">
-			<div class="row">
-				<div class="col-12">
-					<table class="table table-striped table-hover">
+
+		<div class="row">
+			<div class="col-12">
+				<table class="table table-striped table-hover">
+					<tr>
+						<th>Nome</th>
+						<th>Matrícula</th>
+						<th>E-mail</th>
+						<th>Opções</th>
+					</tr>
+					<c:forEach var="colaborador" items="${colaboradores}">
+
 						<tr>
-						<th>Nome</th><th>Matrícula</th><th>E-mail</th><th>Opções</th>
-						</tr>
-						<c:forEach var="colaborador" items="${colaboradores}" >
-							<tr>
-							<td>${colaborador.nome}</td> 
+							<td>${colaborador.nome}</td>
 							<td>${colaborador.matricula}</td>
 							<td>${colaborador.email}</td>
-							<td><button type="submit" id="btnVisualizar" name="acao"
-											value="visualizar_projeto" class="btn btn-primary">Visualizar</button></td>
-							</tr>
-						</c:forEach>
-					</table>
-				</div>
+							<td>
+								<form action="colaboradores.do" method="GET">
+									<input type="hidden" class="form-control" name="id_colaborador"
+										value="${colaborador.id }" />
+									<button type="submit" id="btnVisualizar" name="acao"
+										value="visualizar_colaborador" class="btn btn-primary">Visualizar</button>
+								</form>
+								<form action="colaboradores.do" method="GET">
+									<input type="hidden" class="form-control" name="id_colaborador"
+										value="${colaborador.id }" />
+									<button type="submit" id="btnEditar" name="acao"
+										value="editar_colaborador" class="btn btn-warning">Editar</button>
+								</form>
+							</td>
+						</tr>
+					</c:forEach>
+				</table>
 			</div>
-		</form>
+		</div>
+
 	</div>
-	
-	
+
+
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 </body>

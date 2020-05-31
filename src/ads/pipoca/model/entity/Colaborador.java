@@ -83,7 +83,7 @@ public class Colaborador {
 
 	@Override
 	public String toString() {
-		return "Colaborador [id=" + id + ", matriula =" + matricula + ", nome=" + nome + ", email=" + email
+		return "Colaborador [id=" + id + ", matricula =" + matricula + ", nome=" + nome + ", email=" + email
 				+ ", senha=" + senha + ", dataCadastro=" + dataCadastro + ", ativo=" + ativo +"]";
 	}
 

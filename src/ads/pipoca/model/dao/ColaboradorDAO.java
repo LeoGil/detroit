@@ -40,7 +40,7 @@ public class ColaboradorDAO {
 
 	public Colaborador buscarColaborador(int id) throws IOException {
 		Colaborador colaborador = null;
-		String sql = "SELECT matricula, nome, email, data_cadastro, ativo FROM colaboradores WHERE id = ?";
+		String sql = "SELECT matricula, nome, email, data_cadastro, ativo, senha FROM colaboradores WHERE id = ?";
 
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
@@ -55,6 +55,7 @@ public class ColaboradorDAO {
 					colaborador.setEmail(rs.getString("email"));
 					colaborador.setDataCadastro(rs.getDate("data_cadastro"));
 					colaborador.setAtivo(rs.getBoolean("ativo"));
+					colaborador.setSenha(rs.getString("senha"));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -102,6 +103,7 @@ public class ColaboradorDAO {
 			pst.setString(2, colaborador.getNome());
 			pst.setString(3, colaborador.getEmail());
 			pst.setString(4, colaborador.getSenha());
+			pst.setInt(5, colaborador.getId());
 			pst.execute();
 
 		} catch (SQLException e) {

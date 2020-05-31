@@ -28,6 +28,8 @@ public class ColaboradoresController extends HttpServlet {
 		String senha = null;
 		String saida = "index.jsp";
 		ArrayList<Colaborador> colaboradores = null;
+		String id_colaborador = null;
+		int idColaborador = 0;
 		
 		switch (acao) {
 		case "listar":
@@ -51,6 +53,40 @@ public class ColaboradoresController extends HttpServlet {
 			
 			saida = "index.jsp";
 			break;
+			
+		case "visualizar_colaborador":
+			id_colaborador = request.getParameter("id_colaborador");
+			idColaborador = Integer.parseInt(id_colaborador);
+			colaborador = cService.buscarColaborador(idColaborador);
+			request.setAttribute("colaborador", colaborador);
+			saida = "VisualizarColaborador.jsp";
+			break;
+		
+		case "editar_colaborador":
+			id_colaborador = request.getParameter("id_colaborador");
+			idColaborador = Integer.parseInt(id_colaborador);
+			colaborador = cService.buscarColaborador(idColaborador);
+			request.setAttribute("colaborador", colaborador);
+			saida = "EditarColaborador.jsp";
+			break;	
+		
+		case "salvar_colaborador":
+			nome = request.getParameter("nome");
+			email = request.getParameter("email");
+			matricula = request.getParameter("matricula");
+			senha = request.getParameter("senha");
+			id_colaborador = request.getParameter("id_colaborador");
+			idColaborador = Integer.parseInt(id_colaborador);
+			colaborador = new Colaborador();
+			colaborador.setNome(nome);
+			colaborador.setEmail(email);
+			colaborador.setMatricula(matricula);
+			colaborador.setSenha(senha);
+			colaborador.setId(idColaborador);
+			cService.atualizarColaborador(colaborador);
+			
+			saida = "index.jsp";
+			break;	
 			
 		default:
 			break;
