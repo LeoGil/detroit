@@ -27,6 +27,10 @@ public class ComentarioService {
 		}
 	}
 	
+	public ArrayList<Comentario> listarComentariosPorProjeto(int projeto_id) throws IOException {
+		return dao.listarComentarios(projeto_id);
+	}
+	
 	public Comentario buscarComentario(int id) throws IOException {
 		return dao.buscarComentario(id);
 	}

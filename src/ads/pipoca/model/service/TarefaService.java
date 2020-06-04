@@ -25,6 +25,10 @@ public class TarefaService {
 		return dao.listarTarefas();
 	}
 	
+	public ArrayList<Tarefa> listarContribuintesPorProjeto(int projeto_id) throws IOException {
+		return dao.listarTarefas(projeto_id);
+	}
+	
 	public ArrayList<Tarefa> listarTarefas(ArrayList<Integer> lista) throws IOException {
 		ArrayList<Tarefa> tarefas = new ArrayList<>();
 		for(int id:lista) {

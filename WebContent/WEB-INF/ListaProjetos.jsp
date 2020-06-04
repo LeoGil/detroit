@@ -112,7 +112,7 @@
 							</h5>
 							<hr>
 							<ul class="list-unstyled">
-								<li><b>Produtc Owner: </b>${projeto.colaborador.nome }</li>
+								<li><b>Responsável: </b>${projeto.colaborador.nome }</li>
 								<li><b>Objetivo: </b>${projeto.objetivo.descricao }</li>
 								<li><b>Situação do projeto: </b>${projeto.situacaoProjeto.situacao }</li>
 							</ul>

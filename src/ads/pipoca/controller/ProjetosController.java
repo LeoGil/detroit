@@ -13,13 +13,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ads.pipoca.model.entity.Colaborador;
+import ads.pipoca.model.entity.Comentario;
+import ads.pipoca.model.entity.Contribuinte;
 import ads.pipoca.model.entity.Objetivo;
 import ads.pipoca.model.entity.Projeto;
 import ads.pipoca.model.entity.SituacaoProjeto;
+import ads.pipoca.model.entity.Tarefa;
 import ads.pipoca.model.service.ColaboradorService;
+import ads.pipoca.model.service.ComentarioService;
+import ads.pipoca.model.service.ContribuinteService;
 import ads.pipoca.model.service.ObjetivoService;
 import ads.pipoca.model.service.ProjetoService;
 import ads.pipoca.model.service.SituacaoProjetoService;
+import ads.pipoca.model.service.TarefaService;
 
 /**
  * Servlet implementation class ProjetosController
@@ -29,9 +35,11 @@ public class ProjetosController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		String acao = request.getParameter("acao");
 		Projeto projeto = null;
@@ -41,8 +49,15 @@ public class ProjetosController extends HttpServlet {
 		ProjetoService pService = new ProjetoService();
 		ObjetivoService oService = new ObjetivoService();
 		ColaboradorService cService = new ColaboradorService();
+		ContribuinteService ctService = new ContribuinteService();
 		SituacaoProjetoService spService = new SituacaoProjetoService();
+		TarefaService tService = new TarefaService();
+		ComentarioService cmService = new ComentarioService();
 		ArrayList<Objetivo> objetivos = null;
+		ArrayList<Contribuinte> contribuintes = null;
+		ArrayList<Tarefa> tarefas = null;
+		ArrayList<Comentario> comentarios = null;
+		String id_projeto = null;
 		String nome = null;
 		String estimativa = null;
 		String idObjetivo = null;
@@ -54,16 +69,17 @@ public class ProjetosController extends HttpServlet {
 		java.util.Date dataEstimativa = null;
 		String saida = "index.jsp";
 		ArrayList<Projeto> projetos = null;
-		
+		int idProjeto = 0;
+
 		switch (acao) {
 		case "listar":
 			projetos = pService.listarProjetos();
-			objetivos = oService.listarObjetivos();			
+			objetivos = oService.listarObjetivos();
 			request.setAttribute("projetos", projetos);
 			request.setAttribute("objetivos", objetivos);
 			saida = "ListaProjetos.jsp";
 			break;
-			
+
 		case "inserir_projeto":
 			nome = request.getParameter("nome");
 			estimativa = request.getParameter("estimativa");
@@ -94,12 +110,30 @@ public class ProjetosController extends HttpServlet {
 			projeto.setDescricao(descricao);
 			int id = pService.inserirProjeto(projeto);
 			projeto.setId(id);
-			
+
 			System.out.println(projeto);
-			//request.setAttribute("filme", filme);
+			// request.setAttribute("filme", filme);
 			saida = "index.jsp";
 			break;
+
+		case "visualizar_projeto":
+			id_projeto = request.getParameter("id_projeto");
+			idProjeto = Integer.parseInt(id_projeto);
+
+			projeto = pService.buscarProjeto(idProjeto);
+			request.setAttribute("projeto", projeto);
+
+			contribuintes = ctService.listarContribuintesPorProjeto(idProjeto);
+			request.setAttribute("contribuintes", contribuintes);
 			
+			tarefas = tService.listarContribuintesPorProjeto(idProjeto);
+			request.setAttribute("tarefas", tarefas);
+			
+			comentarios = cmService.listarComentariosPorProjeto(idProjeto);
+			request.setAttribute("comentarios", comentarios);
+
+			saida = "VisualizarProjeto.jsp";
+			break;
 		default:
 			break;
 		}
@@ -108,9 +142,11 @@ public class ProjetosController extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}

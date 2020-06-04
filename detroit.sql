@@ -162,3 +162,27 @@ UPDATE `detroit`.`situacoes_projetos` SET `classe`='success' WHERE `id`='3';
 ALTER TABLE `detroit`.`comentarios` 
 CHANGE COLUMN `projeto_id` `projeto_id` INT(11) NULL ,
 ADD COLUMN `tarefa_id` INT(11) NULL AFTER `ativo`;
+
+
+
+INSERT INTO `detroit`.`papeis` (`papel`) VALUES ('Product Owner');
+INSERT INTO `detroit`.`papeis` (`papel`) VALUES ('Scrum Master');
+INSERT INTO `detroit`.`papeis` (`papel`) VALUES ('Developer');
+
+
+ALTER TABLE `detroit`.`contribuintes` 
+ADD COLUMN `colaborador_id` INT(11) NOT NULL AFTER `ativo`;
+
+
+ALTER TABLE `detroit`.`tarefas` 
+CHANGE COLUMN `descricao` `descricao` VARCHAR(255) NOT NULL ,
+ADD COLUMN `titulo` VARCHAR(100) NOT NULL AFTER `ativo`;
+
+
+ALTER TABLE `detroit`.`tarefas` 
+CHANGE COLUMN `descricao` `descricao` TEXT NOT NULL ;
+
+
+ALTER TABLE `detroit`.`comentarios` 
+CHANGE COLUMN `comentario` `comentario` TEXT NOT NULL ;
+

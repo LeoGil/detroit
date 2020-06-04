@@ -115,12 +115,10 @@ public class Projeto {
 	@Override
 	public String toString() {
 		return "Projeto [id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", estimativa=" + estimativa
-				+ ", colaborador=" + colaborador.getNome() + ", situacaoProjeto=" + situacaoProjeto.getSituacao() + ", objetivo=" + objetivo.getDescricao()
-				+ ", departamento=" + departamento + ", resultadoEsperado=" + resultadoEsperado
-				+ ", publicoBeneficiario=" + publicoBeneficiario + ", dataCadastro=" + dataCadastro + ", ativo=" + ativo
-				+ "]";
+				+ ", colaborador=" + colaborador.getNome() + ", situacaoProjeto=" + situacaoProjeto.getSituacao()
+				+ ", objetivo=" + objetivo.getDescricao() + ", departamento=" + departamento + ", resultadoEsperado="
+				+ resultadoEsperado + ", publicoBeneficiario=" + publicoBeneficiario + ", dataCadastro=" + dataCadastro
+				+ ", ativo=" + ativo + "]";
 	}
-
-	
 
 }

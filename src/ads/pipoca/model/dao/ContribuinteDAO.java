@@ -7,16 +7,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ads.pipoca.model.entity.Colaborador;
 import ads.pipoca.model.entity.Contribuinte;
 import ads.pipoca.model.entity.Papel;
 import ads.pipoca.model.entity.Projeto;
 
 public class ContribuinteDAO {
-	
+
 	public int inserirContribuinte(Contribuinte contribuinte) throws IOException {
 		int id = -1;
-		String sql = "INSERT INTO contribuintes ( projeto_id, papel_id)"
-					+"VALUES (?,?);";
+		String sql = "INSERT INTO contribuintes ( projeto_id, papel_id)" + "VALUES (?,?);";
 
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
@@ -43,11 +43,9 @@ public class ContribuinteDAO {
 	public Contribuinte buscarContribuinte(int id) throws IOException {
 		Contribuinte contribuinte = null;
 		String sql = "SELECT contribuintes.projeto_id, projetos.nome, contribuintes.papel_id, papeis.papel, contribuintes.data_cadastro, contribuintes.ativo"
-					+"FROM contribuintes"
-					+"INNER JOIN projetos ON projetos.id = contribuintes.projeto_id"
-					+"INNER JOIN papeis ON papeis.id = contribuintes.papel_id"
-					+"WHERE contribuintes.id = ?;";
-		
+				+ "FROM contribuintes" + "INNER JOIN projetos ON projetos.id = contribuintes.projeto_id"
+				+ "INNER JOIN papeis ON papeis.id = contribuintes.papel_id" + "WHERE contribuintes.id = ?;";
+
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setInt(1, id);
@@ -66,7 +64,7 @@ public class ContribuinteDAO {
 					contribuinte.setPapel(papel);
 					contribuinte.setDataCadastro(rs.getDate("tarefas.data_cadastro"));
 					contribuinte.setAtivo(rs.getBoolean("tarefas.ativo"));
-					
+
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -83,9 +81,8 @@ public class ContribuinteDAO {
 		Contribuinte contribuinte = null;
 		ArrayList<Contribuinte> lista = new ArrayList<>();
 		String sql = "SELECT contribuintes.id, contribuintes.projeto_id, projetos.nome, contribuintes.papel_id, papeis.papel, contribuintes.data_cadastro, contribuintes.ativo"
-					+"FROM contribuintes"
-					+"INNER JOIN projetos ON projetos.id = contribuintes.projeto_id"
-					+"INNER JOIN papeis ON papeis.id = contribuintes.papel_id";
+				+ "FROM contribuintes" + "INNER JOIN projetos ON projetos.id = contribuintes.projeto_id"
+				+ "INNER JOIN papeis ON papeis.id = contribuintes.papel_id";
 
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement pst = conn.prepareStatement(sql);
@@ -112,14 +109,54 @@ public class ContribuinteDAO {
 		}
 		return lista;
 	}
-	
-	
-	public void excluirContribuinte(int id) throws IOException {
-		String sql = "DELETE FROM contribuintes "
-					+ "WHERE id = ?";
 
-		try (Connection conn = ConnectionFactory.getConnection(); 
-				PreparedStatement pst = conn.prepareStatement(sql);) {
+	public ArrayList<Contribuinte> listarContribuintes(int projeto_id) throws IOException {
+		Contribuinte contribuinte = null;
+		ArrayList<Contribuinte> lista = new ArrayList<>();
+		String sql = "SELECT contribuintes.id, contribuintes.projeto_id, projetos.nome, contribuintes.papel_id, papeis.papel, contribuintes.colaborador_id, colaboradores.nome, contribuintes.data_cadastro, contribuintes.ativo "
+				+ "FROM contribuintes INNER JOIN projetos ON projetos.id = contribuintes.projeto_id "
+				+ "INNER JOIN colaboradores ON contribuintes.colaborador_id = colaboradores.id "
+				+ "INNER JOIN papeis ON papeis.id = contribuintes.papel_id WHERE contribuintes.projeto_id = ?";
+
+		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+
+			pst.setInt(1, projeto_id);
+			try (ResultSet rs = pst.executeQuery();) {
+
+				while (rs.next()) {
+					contribuinte = new Contribuinte();
+					contribuinte.setId(rs.getInt("contribuintes.id"));
+					Projeto projeto = new Projeto();
+					projeto.setId(projeto_id);
+					projeto.setNome(rs.getString("projetos.nome"));
+					contribuinte.setProjeto(projeto);
+					Papel papel = new Papel();
+					papel.setId(rs.getInt("contribuintes.papel_id"));
+					papel.setPapel(rs.getString("papeis.papel"));
+					contribuinte.setPapel(papel);
+					Colaborador colaborador = new Colaborador();
+					colaborador.setId(rs.getInt("contribuintes.colaborador_id"));
+					colaborador.setNome(rs.getString("colaboradores.nome"));
+					contribuinte.setColaborador(colaborador);
+					contribuinte.setDataCadastro(rs.getDate("contribuintes.data_cadastro"));
+					contribuinte.setAtivo(rs.getBoolean("contribuintes.ativo"));
+					lista.add(contribuinte);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new IOException(e);
+		}
+		return lista;
+	}
+
+	public void excluirContribuinte(int id) throws IOException {
+		String sql = "DELETE FROM contribuintes " + "WHERE id = ?";
+
+		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setInt(1, id);
 			pst.execute();

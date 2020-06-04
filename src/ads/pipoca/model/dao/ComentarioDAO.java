@@ -129,4 +129,45 @@ public class ComentarioDAO {
 		return lista;
 	}
 	
+	public ArrayList<Comentario> listarComentarios(int projeto_id) throws IOException {
+		Comentario comentario = null;
+		ArrayList<Comentario> lista = new ArrayList<>();
+		String sql = "SELECT comentarios.id, comentario, comentarios.projeto_id, projetos.nome, comentarios.colaborador_id, colaboradores.nome, tarefa_id, tarefas.descricao, comentarios.data_cadastro, comentarios.ativo " 
+				+ "FROM comentarios " 
+				+ "INNER JOIN colaboradores ON colaboradores.id = comentarios.colaborador_id "
+				+ "LEFT JOIN projetos ON projetos.id = comentarios.projeto_id "
+				+ "LEFT JOIN tarefas ON tarefas.id = comentarios.tarefa_id WHERE comentarios.projeto_id = ? ORDER BY comentarios.data_cadastro DESC";
+
+		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setInt(1, projeto_id);
+			
+			try (ResultSet rs = pst.executeQuery();) {
+
+				while (rs.next()) {
+					comentario = new Comentario();
+					comentario.setId(rs.getInt("comentarios.id"));
+					comentario.setComentario(rs.getString("comentario"));
+					Projeto projeto = new Projeto();
+					projeto.setId(projeto_id);
+					projeto.setNome(rs.getString("projetos.nome")); 
+					comentario.setProjeto(projeto);
+					Colaborador colaborador = new Colaborador();
+					colaborador.setId(rs.getInt("comentarios.colaborador_id"));
+					colaborador.setNome(rs.getString("colaboradores.nome"));
+					comentario.setColaborador(colaborador);
+					comentario.setDataCadastro(rs.getDate("comentarios.data_cadastro"));
+					comentario.setAtivo(rs.getBoolean("comentarios.ativo"));
+					lista.add(comentario);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new IOException(e);
+		}
+		return lista;
+	}
+	
 }
