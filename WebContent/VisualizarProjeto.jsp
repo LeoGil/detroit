@@ -35,7 +35,9 @@
 			</div>
 			<div class="row mb-5">
 				<div class="col-12">
-					<h3 class="mb-4">Tarefas</h3>
+					<h3 class="mb-4 float-left">Tarefas</h3>
+					<button type="button" class="btn btn-danger float-right">
+						Finalizar Projeto</button>
 					<nav>
 						<div class="nav nav-tabs" id="nav-tab" role="tablist">
 							<c:forEach var="tarefa" items="${tarefas}">
@@ -82,18 +84,6 @@
 											<button type="button" class="btn btn-danger btn-sm">Excluir</button>
 										</div>
 									</c:forEach>
-								</div>
-							</div>
-							<!-- Comment Row -->
-							<div class="row">
-								<div class="col-12 mb-4">
-									<h6 class="font-weight-bold">Michael Hussey</h6>
-									<span class="m-b-15 d-block">Thanks bbbootstrap.com for
-										providing such useful snippets. </span>
-									<div class="comment-footer">
-										<span class="text-muted float-right">August 1, 2019</span>
-										<button type="button" class="btn btn-danger btn-sm">Excluir</button>
-									</div>
 								</div>
 							</div>
 						</div>
