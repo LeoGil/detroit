@@ -13,7 +13,7 @@
 <!-- <title>LOGIN</title!> -->
 
 <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
-<title>LOGIN</title>
+<title>Login</title>
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 <!-- Bootstrap core CSS -->
@@ -22,19 +22,21 @@
 
 </head>
 <body class="text-center">
-	<form class="form-signin">
+	<form action="login.do" method="post">
 		<div class="row justify-content-md-center align-items-center">
 			<div class="col-md-4">
 				<img class="mb-4">
 				<h1 class="h3 mb-3 font-weight-normal">Login</h1>
-				<label for="inputMatricula" class="sr-only col-md-4">Número de Matricula</label> <input type="text" id="input_matricula"
-					class="form-control" placeholder="Matricula" required autofocus>
-				<label for="inputPassword" class="sr-only col-md-4">Senha</label> <input
-					type="password" id="input_senha" class="form-control"
-					placeholder="Senha" required>
+				<label for="inputMatricula" class="sr-only col-md-4">Número
+					de Matricula</label> <input type="text" id="input_matricula"
+					class="form-control mb-3" placeholder="Matricula" required
+					autofocus name="matricula"> <label for="inputPassword"
+					class="sr-only col-md-4">Senha</label> <input type="password"
+					id="input_senha" class="form-control mb-3" placeholder="Senha" name="senha"
+					required>
 
-				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-					In</button>
+				<button class="btn btn-lg btn-primary btn-block" type="submit"
+					name="acao" value="login">Entrar</button>
 				<p class="mt-5 mb-3 text-muted">© Detroid</p>
 			</div>
 		</div>
@@ -42,5 +44,6 @@
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 </body>
 </html>

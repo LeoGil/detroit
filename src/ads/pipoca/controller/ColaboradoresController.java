@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ads.pipoca.model.entity.Colaborador;
 import ads.pipoca.model.service.ColaboradorService;
@@ -19,6 +20,8 @@ public class ColaboradoresController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		HttpServletRequest req = (HttpServletRequest)request;
+		HttpSession session = req.getSession();
 		String acao = request.getParameter("acao");
 		Colaborador colaborador = null;
 		ColaboradorService cService = new ColaboradorService();
@@ -35,6 +38,9 @@ public class ColaboradoresController extends HttpServlet {
 		case "listar":
 			colaboradores = cService.listarColaboradores();
 			request.setAttribute("colaboradores", colaboradores);
+			
+			request.setAttribute("usuarioLogado", (Colaborador)session.getAttribute("logado"));
+			
 			saida = "ListaColaboradores.jsp";
 			break;
 			
@@ -59,6 +65,8 @@ public class ColaboradoresController extends HttpServlet {
 			idColaborador = Integer.parseInt(id_colaborador);
 			colaborador = cService.buscarColaborador(idColaborador);
 			request.setAttribute("colaborador", colaborador);
+			request.setAttribute("usuarioLogado", (Colaborador)session.getAttribute("logado"));
+			
 			saida = "VisualizarColaborador.jsp";
 			break;
 		
@@ -67,6 +75,8 @@ public class ColaboradoresController extends HttpServlet {
 			idColaborador = Integer.parseInt(id_colaborador);
 			colaborador = cService.buscarColaborador(idColaborador);
 			request.setAttribute("colaborador", colaborador);
+			request.setAttribute("usuarioLogado", (Colaborador)session.getAttribute("logado"));
+			
 			saida = "EditarColaborador.jsp";
 			break;	
 		
@@ -87,6 +97,12 @@ public class ColaboradoresController extends HttpServlet {
 			
 			saida = "index.jsp";
 			break;	
+			
+		case "deslogar":
+			session.invalidate();
+			
+			saida = "Login.jsp";
+			break;
 			
 		default:
 			break;

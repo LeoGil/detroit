@@ -16,12 +16,14 @@ public class ContribuinteDAO {
 
 	public int inserirContribuinte(Contribuinte contribuinte) throws IOException {
 		int id = -1;
-		String sql = "INSERT INTO contribuintes ( projeto_id, papel_id)" + "VALUES (?,?);";
+		String sql = "INSERT INTO contribuintes (projeto_id, papel_id, colaborador_id) " 
+		+ "VALUES (?,?,?);";
 
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setInt(1, contribuinte.getProjeto().getId());
 			pst.setInt(2, contribuinte.getPapel().getId());
+			pst.setInt(3, contribuinte.getColaborador().getId());
 			pst.execute();
 
 			// obter o id criado
@@ -42,9 +44,11 @@ public class ContribuinteDAO {
 
 	public Contribuinte buscarContribuinte(int id) throws IOException {
 		Contribuinte contribuinte = null;
-		String sql = "SELECT contribuintes.projeto_id, projetos.nome, contribuintes.papel_id, papeis.papel, contribuintes.data_cadastro, contribuintes.ativo"
-				+ "FROM contribuintes" + "INNER JOIN projetos ON projetos.id = contribuintes.projeto_id"
-				+ "INNER JOIN papeis ON papeis.id = contribuintes.papel_id" + "WHERE contribuintes.id = ?;";
+		String sql = "SELECT contribuintes.projeto_id, projetos.nome, contribuintes.papel_id, papeis.papel, contribuintes.data_cadastro, contribuintes.ativo "
+				+ "FROM contribuintes " 
+				+ "INNER JOIN projetos ON projetos.id = contribuintes.projeto_id "
+				+ "INNER JOIN papeis ON papeis.id = contribuintes.papel_id " 
+				+ "WHERE contribuintes.id = ?;";
 
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
@@ -62,8 +66,8 @@ public class ContribuinteDAO {
 					papel.setId(rs.getInt("contribuintes.papel_id"));
 					papel.setPapel(rs.getString("papeis.papel"));
 					contribuinte.setPapel(papel);
-					contribuinte.setDataCadastro(rs.getDate("tarefas.data_cadastro"));
-					contribuinte.setAtivo(rs.getBoolean("tarefas.ativo"));
+					contribuinte.setDataCadastro(rs.getDate("contribuintes.data_cadastro"));
+					contribuinte.setAtivo(rs.getBoolean("contribuintes.ativo"));
 
 				}
 			} catch (SQLException e) {

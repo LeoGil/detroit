@@ -12,14 +12,13 @@ import ads.pipoca.model.entity.*;
 public class ComentarioDAO {
 	public int inserirComentario(Comentario comentario) throws IOException {
 		int id = -1;
-		String sql = "insert into comentarios (comentario, projeto_id, colaborador_id, tarefa_id)" + "values (?,?,?,?)";
+		String sql = "insert into comentarios (comentario, projeto_id, colaborador_id)" + "values (?,?,?)";
 
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setString(1, comentario.getComentario());
 			pst.setInt(2, comentario.getProjeto().getId());
 			pst.setInt(3, comentario.getColaborador().getId());
-			pst.setInt(4, comentario.getTarefa().getId());
 			pst.execute();
 
 			// obter o id criado
@@ -54,8 +53,8 @@ public class ComentarioDAO {
 	
 	public Comentario buscarComentario(int id) throws IOException {
 		Comentario comentario = null;
-		String sql = "select id, comentario, projeto_id , colaborador_id , data_cadastro,"
-					+ "ativo, tarefa_id from comentarios"
+		String sql = "select id, comentario, projeto_id , colaborador_id , data_cadastro, "
+					+ "ativo, tarefa_id from comentarios "
 					+ "where id = ?;";
 
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
@@ -73,7 +72,7 @@ public class ComentarioDAO {
 					Colaborador colaborador = new Colaborador();
 					colaborador.setId(rs.getInt("colaborador_id"));
 					comentario.setColaborador(colaborador);
-					comentario.setDataCadastro(rs.getDate("data_lancamento"));
+					comentario.setDataCadastro(rs.getDate("data_cadastro"));
 					comentario.setAtivo(rs.getBoolean("ativo"));
 					Tarefa tarefa = new Tarefa();
 					tarefa.setId(rs.getInt("tarefa_id"));

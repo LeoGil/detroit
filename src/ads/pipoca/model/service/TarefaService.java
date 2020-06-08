@@ -29,16 +29,28 @@ public class TarefaService {
 		return dao.listarTarefas(projeto_id);
 	}
 	
-	public ArrayList<Tarefa> listarTarefas(ArrayList<Integer> lista) throws IOException {
-		ArrayList<Tarefa> tarefas = new ArrayList<>();
-		for(int id:lista) {
-			tarefas.add(buscarTarefa(id));
-		}
-		return tarefas;
+	public ArrayList<Tarefa> listarContribuintesPorProjetoToDo(int projeto_id) throws IOException {
+		return dao.listarTarefas(projeto_id, 1);
 	}
 	
-	public void editarTarefa(Tarefa tarefa) throws IOException {
-		dao.editarTarefa(tarefa);
+	public ArrayList<Tarefa> listarContribuintesPorProjetoDoing(int projeto_id) throws IOException {
+		return dao.listarTarefas(projeto_id, 2);
+	}
+	
+	public ArrayList<Tarefa> listarContribuintesPorProjetoDone(int projeto_id) throws IOException {
+		return dao.listarTarefas(projeto_id, 3);
+	}
+	
+	public void updateSituacaoTarefa(int tarefa_id, int situacao_id) throws IOException {
+		dao.updateSituacaoTarefa(tarefa_id, situacao_id);
+	}
+	
+	public int totalTarefasPorProjeto(int projeto) throws IOException {
+		return dao.totalTarefa(projeto);
+	}
+	
+	public int totalTarefasFeitasPorProjeto(int projeto) throws IOException {
+		return dao.totalTarefa(projeto, 3);
 	}
 	
 	public void excluirTarefa(int id) throws IOException {

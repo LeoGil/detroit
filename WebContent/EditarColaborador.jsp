@@ -31,8 +31,8 @@
 		<form action="colaboradores.do" method="GET">
 			<div class="row">
 				<div class="col-12">
-				<input type="hidden" class="form-control" name="id_colaborador"
-										value="${colaborador.id }" />
+					<input type="hidden" class="form-control" name="id_colaborador"
+						value="${colaborador.id }" />
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label for="input_nome">Nome</label> <input type="text"
@@ -59,12 +59,11 @@
 						</div>
 					</div>
 				</div>
-				<div id="actions" class="row">
-					<div class="col-md-12">
-						<button type="submit" class="btn btn-primary" name="acao"
-							value="salvar_colaborador">Atualizar</button>
-						<a href="ListaColaboradores.jsp" class="btn btn-default">Voltar</a>
-					</div>
+			</div>
+			<div id="actions" class="row">
+				<div class="col-md-12">
+					<button type="submit" class="btn btn-primary" name="acao"
+						value="salvar_colaborador">Atualizar</button>
 				</div>
 			</div>
 		</form>
@@ -73,5 +72,9 @@
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
 </body>
 </html>

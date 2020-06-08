@@ -48,10 +48,6 @@
 								class="form-control" name="matricula" id="input_matricula"
 								required>
 						</div>
-						<div class="form-group col-md-6">
-							<label for="input_senha">Senha</label> <input type="password" value="******" readonly="readonly"
-								class="form-control" name="senha" id="input_senha" required>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -61,5 +57,6 @@
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 </body>
 </html>

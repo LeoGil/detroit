@@ -13,7 +13,7 @@ public class ColaboradorDAO {
 	public int inserirColaborador(Colaborador colaborador) throws IOException {
 		int id = -1;
 		String sql = "INSERT INTO colaboradores (matricula, nome, email, senha) VALUES (?, ?, ?, ?);";
-		
+
 		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setString(1, colaborador.getMatricula());
@@ -67,7 +67,41 @@ public class ColaboradorDAO {
 		}
 		return colaborador;
 	}
-	
+
+	public ArrayList<Colaborador> listarColaboradoresLiberados(int projeto_id) throws IOException {
+		Colaborador colaborador = null;
+		ArrayList<Colaborador> lista = new ArrayList<>();
+		String sql = "SELECT id, matricula, nome, email, data_cadastro, ativo FROM colaboradores "
+				+ "	WHERE colaboradores.id NOT IN (SELECT colaborador_id FROM contribuintes WHERE projeto_id = ?) "
+				+ "	AND colaboradores.id NOT IN (select colaborador_id FROM projetos where id = ?)";
+
+		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
+			pst.setInt(1, projeto_id);
+			pst.setInt(2, projeto_id);
+
+			try (ResultSet rs = pst.executeQuery();) {
+
+				while (rs.next()) {
+					colaborador = new Colaborador();
+					colaborador.setId(rs.getInt("id"));
+					colaborador.setMatricula(rs.getString("matricula"));
+					colaborador.setNome(rs.getString("nome"));
+					colaborador.setEmail(rs.getString("email"));
+					colaborador.setDataCadastro(rs.getDate("data_cadastro"));
+					colaborador.setAtivo(rs.getBoolean("ativo"));
+					lista.add(colaborador);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+				throw new IOException(e);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new IOException(e);
+		}
+		return lista;
+	}
+
 	public ArrayList<Colaborador> listarColaboradores() throws IOException {
 		Colaborador colaborador = null;
 		ArrayList<Colaborador> lista = new ArrayList<>();
@@ -109,14 +143,13 @@ public class ColaboradorDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new IOException(e);
-		}		
+		}
 	}
-	
+
 	public void excluirColaborador(int id) throws IOException {
 		String sql = "delete from colaboradores where id = ?";
 
-		try (Connection conn = ConnectionFactory.getConnection(); 
-				PreparedStatement pst = conn.prepareStatement(sql);) {
+		try (Connection conn = ConnectionFactory.getConnection(); PreparedStatement pst = conn.prepareStatement(sql);) {
 
 			pst.setInt(1, id);
 			pst.execute();
@@ -125,9 +158,9 @@ public class ColaboradorDAO {
 			throw new IOException(e);
 		}
 	}
-	
+
 	public boolean logar(Colaborador colaborador) throws IOException {
-		String sqlSelect = "SELECT matricula, senha FROM colaboradores " + "WHERE matricula = ? and senha = ?";
+		String sqlSelect = "SELECT id, nome, email, data_cadastro, ativo, matricula, senha FROM colaboradores WHERE matricula = ? and senha = ?";
 
 		try (Connection conn = ConnectionFactory.getConnection();
 				PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
@@ -135,6 +168,11 @@ public class ColaboradorDAO {
 			stm.setString(2, colaborador.getSenha());
 			try (ResultSet rs = stm.executeQuery();) {
 				if (rs.next()) {
+					colaborador.setId(rs.getInt("id"));
+					colaborador.setNome(rs.getString("nome"));
+					colaborador.setEmail(rs.getString("email"));
+					colaborador.setDataCadastro(rs.getDate("data_cadastro"));
+					colaborador.setAtivo(rs.getBoolean("ativo"));
 					return true;
 				} else {
 					return false;

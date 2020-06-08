@@ -35,9 +35,9 @@ public class SituacaoTarefaDAO {
 	
 	public SituacaoTarefa buscarSituacaoTarefa(int id) throws IOException {
 		SituacaoTarefa situacaoTarefa = null;
-		String sql = "SELECT id, situacao"
-					+"FROM situacoes_TAREFAS"
-					+"WHERE id=?";
+		String sql = "SELECT id, situacao "
+					+"FROM situacoes_TAREFAS "
+					+"WHERE id = ?";
 
 		try (Connection conn = ConnectionFactory.getConnection(); 
 				PreparedStatement pst = conn.prepareStatement(sql);) {

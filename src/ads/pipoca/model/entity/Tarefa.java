@@ -7,6 +7,7 @@ public class Tarefa {
 	private String titulo;
 	private String descricao;
 	private Projeto projeto;
+	private Colaborador colaborador;
 	private SituacaoTarefa situacaoTarefa;
 	private Date dataCadastro;
 	private Boolean ativo;
@@ -42,6 +43,14 @@ public class Tarefa {
 	public void setProjeto(Projeto projeto) {
 		this.projeto = projeto;
 	}
+	
+	public Colaborador getColaborador() {
+		return colaborador;
+	}
+
+	public void setColaborador(Colaborador colaborador) {
+		this.colaborador = colaborador;
+	}
 
 	public SituacaoTarefa getSituacaoTarefa() {
 		return situacaoTarefa;
@@ -69,8 +78,8 @@ public class Tarefa {
 
 	@Override
 	public String toString() {
-		return "Tarefa [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", projeto=" + projeto
-				+ ", situacaoTarefa=" + situacaoTarefa + ", dataCadastro=" + dataCadastro + ", ativo=" + ativo + "]";
+		return "Tarefa [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", projeto=" + projeto.getNome() + ", colaborador=" + colaborador.getNome()
+				+ ", situacaoTarefa=" + situacaoTarefa.getSituacao() + ", dataCadastro=" + dataCadastro + ", ativo=" + ativo + "]";
 	}
 
 }

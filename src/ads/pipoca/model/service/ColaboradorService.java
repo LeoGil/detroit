@@ -16,6 +16,10 @@ public class ColaboradorService {
 	public ArrayList<Colaborador> listarColaboradores() throws IOException {
 		return dao.listarColaboradores();
 	}
+	
+	public ArrayList<Colaborador> listarColaboradoresLiberados(int projeto_id) throws IOException {
+		return dao.listarColaboradoresLiberados(projeto_id);
+	}
 
 	public int inserirColaborador(Colaborador colaborador) throws IOException {
 		return dao.inserirColaborador(colaborador);

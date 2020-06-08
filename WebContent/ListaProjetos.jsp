@@ -77,6 +77,8 @@
 						</div>
 					</div>
 					<div class="modal-footer">
+						<input type="hidden" class="form-control" name="id_colaborador"
+							value="${usuarioLogado.id }" />
 						<button type="button" class="btn btn-secondary"
 							data-dismiss="modal">Close</button>
 						<button type="submit" class="btn btn-success" name="acao"
@@ -112,7 +114,7 @@
 							</h5>
 							<hr>
 							<ul class="list-unstyled">
-								<li><b>Produtc Owner: </b>${projeto.colaborador.nome }</li>
+								<li><b>Product Owner: </b>${projeto.colaborador.nome }</li>
 								<li><b>Objetivo: </b>${projeto.objetivo.descricao }</li>
 								<li><b>Situação do projeto: </b>${projeto.situacaoProjeto.situacao }</li>
 							</ul>
@@ -141,6 +143,10 @@
 	</script> -->
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
 	<script>
 		$('#departamento').hide()
 		$('#resultado_esperado').hide()

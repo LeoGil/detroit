@@ -101,12 +101,6 @@
 									<button type="submit" id="btnVisualizar" name="acao"
 										value="visualizar_colaborador" class="btn btn-primary">Visualizar</button>
 								</form>
-								<form action="colaboradores.do" method="GET">
-									<input type="hidden" class="form-control" name="id_colaborador"
-										value="${colaborador.id }" />
-									<button type="submit" id="btnEditar" name="acao"
-										value="editar_colaborador" class="btn btn-warning">Editar</button>
-								</form>
 							</td>
 						</tr>
 					</c:forEach>
@@ -119,5 +113,6 @@
 
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 </body>
 </html>

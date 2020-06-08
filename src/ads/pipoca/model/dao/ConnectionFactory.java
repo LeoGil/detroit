@@ -32,7 +32,7 @@ public class ConnectionFactory {
     public static Connection getConnection() throws IOException {
         try {
             return DriverManager.getConnection("jdbc:mysql://localhost:3306/detroit?"
-                    + "useTimezone=true&serverTimezone=UTC&user=Alunos&password=alunos");
+                    + "useTimezone=true&serverTimezone=America/Sao_Paulo&user=Alunos&password=alunos");
         } catch (SQLException e) {
             e.printStackTrace();
             throw new IOException(e);
