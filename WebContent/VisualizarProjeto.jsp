@@ -289,14 +289,8 @@
 		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
 		crossorigin="anonymous"></script>
 	<script>
-		let total = $
-		{
-			totalTarefas
-		}
-		let totalFeitas = $
-		{
-			totalTarefasFeitas
-		}
+		let total = ${totalTarefas }
+		let totalFeitas = ${totalTarefasFeitas }
 
 		let porcentagem = (totalFeitas * 100) / total
 

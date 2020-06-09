@@ -15,7 +15,7 @@
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/3.3/examples/starter-template/">
 
-<title>Hora da Pipoca</title>
+<title>Página inicial</title>
 
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
